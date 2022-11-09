@@ -68,11 +68,13 @@ document.getElementById('randAll')
 
 document.getElementById('randFirst')
   .addEventListener('click', () => {
-    //state.nbColors += 1;
-    //state.firstColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    // dispatcher une intention
+
+    const newColor = randomHexColor(); // on genere une nouvelle couleur
+    store.dispatch({
+      type: 'CHANGE_FIRST_COLOR', // l'intention
+      payload: newColor, // payload : nouvelle couleur
+    });
   });
 
 document.getElementById('randLast')

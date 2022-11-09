@@ -58,6 +58,12 @@ function reducer(state = initialState, action = {}) {
         direction: '90deg',
       };
 
+    case 'CHANGE_FIRST_COLOR':
+      return {
+        ...state,
+        firstColor: action.payload,
+      };
+
     default:
       return state;
   }
