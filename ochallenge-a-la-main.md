@@ -16,6 +16,6 @@
 
 🥳
 
-# quand vous allez faire un comit push il vous dira un truc comme ça : 
+# quand vous allez faire un commit puis push il vous dira attention la branche distante n'existe pas et il faudra alors faire un truc comme ça pour la creer : 
 
-`git push -u origin master` 
+`git push --set-upstream origin master` 

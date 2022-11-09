@@ -14,6 +14,7 @@ console.log('state', store.getState());
 
 // == Rendu dans le DOM
 function renderNbColors() {
+  console.log('renderNbColors appelé');
   const { nbColors } = store.getState();
 
   document.getElementById('nbColors').innerHTML = `
@@ -21,6 +22,7 @@ function renderNbColors() {
   `;
 }
 function renderGradient() {
+  console.log('renderGradient appelé');
   const { direction, firstColor, lastColor } = store.getState();
 
   document.getElementById('gradient').style.background = `
@@ -28,6 +30,7 @@ function renderGradient() {
   `;
 }
 function renderColors() {
+  console.log('renderColors appelé');
   const { firstColor, lastColor } = store.getState();
 
   const firstSpan = generateSpanColor(firstColor);
@@ -42,6 +45,11 @@ function renderColors() {
 renderNbColors();
 renderGradient();
 renderColors();
+
+// j'abonne mes rendus au changemlents du state
+store.subscribe(renderNbColors);
+store.subscribe(renderGradient);
+store.subscribe(renderColors);
 
 // == Controls
 document.getElementById('randAll')
@@ -78,7 +86,6 @@ document.getElementById('randLast')
 
 document.getElementById('toLeft')
   .addEventListener('click', () => {
-
     /* on ne modifie pas le state directement on demande au store
     en lui dispatchant une intention
     state.direction = '270deg';
@@ -88,15 +95,17 @@ document.getElementById('toLeft')
     par convention on écrit la valeur du type en SCREAMING_SNAKE_CASE :
     MAJUSCULES avec des underscore (c'est pas obligatoire)
     */
-    store.dispatch({ type: 'CHANGE_DIRECTION_TO_LEFT' });
+    store.dispatch({ type: 'TURN_LEFT' });
 
+    /* plus besoin de re executer nous meme le rendu,
+    on a abonné nos rendus aux changements du store
     renderGradient();
     renderColors();
+    */
   });
 
 document.getElementById('toRight')
   .addEventListener('click', () => {
-    //state.direction = '90deg';
-    renderGradient();
-    renderColors();
+    /* dispatcher une action vers le store */
+    store.dispatch({ type: 'TURN_RIGHT' });
   });
