@@ -44,12 +44,12 @@ function reducer(state = initialState, action = {}) {
       Donc au lieu de faire : let futurState = state;
       on fait : let futurState = {...state};
       */
-      const futurState = {
+      const newState = {
         ...state, // on copie ce qu'il y avait dans le state
-        direction: '270deg', // on fait notre modif
       };
+      newState.direction = '270deg';
 
-      return futurState; // on returne ce nouveau state pour que le store le sauvegarde
+      return newState; // on returne ce nouveau state pour que le store le sauvegarde
     }
 
     case 'TURN_RIGHT':
@@ -60,8 +60,9 @@ function reducer(state = initialState, action = {}) {
 
     case 'CHANGE_FIRST_COLOR':
       return {
-        ...state,
-        firstColor: action.payload,
+        ...state, // on copie tout
+        firstColor: action.payload, // on écrase la couleur
+        nbColors: state.nbColors + 1, // on écrase le nbColors
       };
 
     default:
