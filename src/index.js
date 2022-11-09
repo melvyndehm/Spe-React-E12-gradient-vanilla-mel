@@ -1,31 +1,34 @@
 // == Imports
 import { randomHexColor, generateSpanColor } from './utils';
 
-// == State
-const state = {
-  firstColor: '#e367a4',
-  lastColor: '#48b1f3',
-  direction: '90deg',
-  nbColors: 0,
-};
+/*
+On importe le store, il nous met à dispo plusieurs méthodes :
+- getState : pour recuperer le state du store
+*/
+import store from './store';
+
+console.log(store);
+
+// == State -> récupère depuis le store
+console.log('state', store.getState());
 
 // == Rendu dans le DOM
 function renderNbColors() {
-  const { nbColors } = state;
+  const { nbColors } = store.getState();
 
   document.getElementById('nbColors').innerHTML = `
     ${nbColors} couleur(s) générée(s)
   `;
 }
 function renderGradient() {
-  const { direction, firstColor, lastColor } = state;
+  const { direction, firstColor, lastColor } = store.getState();
 
   document.getElementById('gradient').style.background = `
     linear-gradient(${direction},${firstColor},${lastColor})
   `;
 }
 function renderColors() {
-  const { firstColor, lastColor } = state;
+  const { firstColor, lastColor } = store.getState();
 
   const firstSpan = generateSpanColor(firstColor);
   const lastSpan = generateSpanColor(lastColor);
