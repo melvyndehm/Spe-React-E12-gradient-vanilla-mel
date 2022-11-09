@@ -1,16 +1,15 @@
 // == Imports
 import { randomHexColor, generateSpanColor } from './utils';
 
+import { actionChangeFirstColor } from './actions';
+
 /*
 On importe le store, il nous met à dispo plusieurs méthodes :
 - getState : pour recuperer le state du store
+- dispacth : pour envoyer une intention de modif de state
+- subscribe : pour abonner une callback aux changements du state
 */
 import store from './store';
-
-console.log(store);
-
-// == State -> récupère depuis le store
-console.log('state', store.getState());
 
 // == Rendu dans le DOM
 function renderNbColors() {
@@ -46,7 +45,7 @@ renderNbColors();
 renderGradient();
 renderColors();
 
-// j'abonne mes rendus au changemlents du state
+// j'abonne mes rendus au changements du state
 store.subscribe(renderNbColors);
 store.subscribe(renderGradient);
 store.subscribe(renderColors);
@@ -62,10 +61,16 @@ document.getElementById('randAll')
       type: 'CHANGE_FIRST_COLOR', // l'intention
       payload: randomHexColor(), // payload : nouvelle couleur
     });
+
     store.dispatch({
-      type: 'CHANGE_LAST_COLOR',
-      payload: randomHexColor(),
+      type: 'CHANGE_LAST_COLOR', // l'intention
+      payload: randomHexColor(), // payload : nouvelle couleur
     });
+    /*
+    on peut utiliser notre action creator
+    au lieu de taper l'objet à la main
+    store.dispatch(actionChangeFirstColor(randomHexColor()));
+    */
   });
 
 document.getElementById('randFirst')
