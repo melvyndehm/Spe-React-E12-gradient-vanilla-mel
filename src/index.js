@@ -54,16 +54,18 @@ store.subscribe(renderColors);
 // == Controls
 document.getElementById('randAll')
   .addEventListener('click', () => {
-    // debug
-    console.log('Random all colors');
-    // data
-    //state.nbColors += 2;
-    //state.firstColor = randomHexColor();
-    //state.lastColor = randomHexColor();
-    // ui
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    // intention : changer la first + changer la last
+
+    // on peut dispatcher plusieurs action
+    // onpeut dispatcher plusierus fois une meme action
+    store.dispatch({
+      type: 'CHANGE_FIRST_COLOR', // l'intention
+      payload: randomHexColor(), // payload : nouvelle couleur
+    });
+    store.dispatch({
+      type: 'CHANGE_LAST_COLOR',
+      payload: randomHexColor(),
+    });
   });
 
 document.getElementById('randFirst')
@@ -79,11 +81,10 @@ document.getElementById('randFirst')
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
-    //state.nbColors += 1;
-    //state.lastColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    store.dispatch({
+      type: 'CHANGE_LAST_COLOR',
+      payload: randomHexColor(),
+    });
   });
 
 document.getElementById('toLeft')

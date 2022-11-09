@@ -65,6 +65,15 @@ function reducer(state = initialState, action = {}) {
         nbColors: state.nbColors + 1, // on écrase le nbColors
       };
 
+    case 'CHANGE_LAST_COLOR':
+      return {
+        ...state,
+        // on peut recuperer des valeurs dans le payload de l'action
+        lastColor: action.payload,
+        // on peut recuperer des valeurs dans le state
+        nbColors: state.nbColors + 1,
+      };
+
     default:
       return state;
   }
