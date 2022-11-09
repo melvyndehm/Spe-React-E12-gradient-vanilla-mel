@@ -4,13 +4,15 @@
 
 ## Comprendre le store
 
+![](docs/state-vs-store.jpg)
+
 - JS vanilla
 - store
 - state
 - dispatch
 - subscribe
 
-![](docs/with-store.png)
+![](docs/redux.png)
 
 
 ## Identifier les composants
