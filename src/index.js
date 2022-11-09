@@ -49,9 +49,9 @@ document.getElementById('randAll')
     // debug
     console.log('Random all colors');
     // data
-    state.nbColors += 2;
-    state.firstColor = randomHexColor();
-    state.lastColor = randomHexColor();
+    //state.nbColors += 2;
+    //state.firstColor = randomHexColor();
+    //state.lastColor = randomHexColor();
     // ui
     renderNbColors();
     renderGradient();
@@ -60,8 +60,8 @@ document.getElementById('randAll')
 
 document.getElementById('randFirst')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.firstColor = randomHexColor();
+    //state.nbColors += 1;
+    //state.firstColor = randomHexColor();
     renderNbColors();
     renderGradient();
     renderColors();
@@ -69,8 +69,8 @@ document.getElementById('randFirst')
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.lastColor = randomHexColor();
+    //state.nbColors += 1;
+    //state.lastColor = randomHexColor();
     renderNbColors();
     renderGradient();
     renderColors();
@@ -78,14 +78,25 @@ document.getElementById('randLast')
 
 document.getElementById('toLeft')
   .addEventListener('click', () => {
+
+    /* on ne modifie pas le state directement on demande au store
+    en lui dispatchant une intention
     state.direction = '270deg';
+
+    on dispatch une action : c'est un objet de la forme
+    { type: 'change la direction par gauche' }
+    par convention on écrit la valeur du type en SCREAMING_SNAKE_CASE :
+    MAJUSCULES avec des underscore (c'est pas obligatoire)
+    */
+    store.dispatch({ type: 'CHANGE_DIRECTION_TO_LEFT' });
+
     renderGradient();
     renderColors();
   });
 
 document.getElementById('toRight')
   .addEventListener('click', () => {
-    state.direction = '90deg';
+    //state.direction = '90deg';
     renderGradient();
     renderColors();
   });
